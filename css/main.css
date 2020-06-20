@@ -468,10 +468,17 @@ hr{
   flex: 0 0 100%;
   text-align: center;
   font-weight: bold;
+  border: 2px solid #fe4918;
 }
 
 .button:hover{
   background-color: #e33000;
+}
+
+.button.hollow,
+.button.hollow:hover{
+  background-color: #fff;
+  color: #fe4918;
 }
 
 @media (min-width: 480px) {
@@ -567,6 +574,9 @@ hr{
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
+  filter: brightness(.7);
+  -webkit-filter: brightness(.7);
+
 }
 
 .contador{
@@ -577,6 +587,7 @@ hr{
 .contador::before{
   background-image: url('../img/bg-resumen.jpg');
   content: '';
+  margin: 0;
 }
 
 .resumen-evento{
@@ -584,7 +595,7 @@ hr{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-content: space-around;
-  padding: 140px 0;
+  padding: 120px 0;
 }
 
 @media (min-width: 768px) {
@@ -605,17 +616,101 @@ hr{
   flex-wrap: wrap;
 }
 
-@media (min-width: 480px) {
-  .resumen-evento li{
-    flex: 0 0 25%;
-  }
-}
 
-.resumen-evento li .numero{
+
+ .numero{
   color: #fe4918;
   font-size: 4em;
   margin: 0;
 }
+
+/*===============================
+  Lista Precios
+   =============================*/
+.lista-precios{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 768px) {
+  .lista-precios {
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 10px;
+  }
+}
+
+.lista-precios > li{
+  list-style: none;
+  padding: 10px;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+.tabla-precio{
+  background-color: #fff;
+  border: 1px solid #d8d8d8;
+  padding: 40px 0;
+  text-align: center;
+  transition: all .3s ease-in-out;
+}
+
+.tabla-precio ul{
+  text-align: center;
+}
+
+.tabla-precio:hover{
+  transform: scale(1.1);
+  border: 1px solid #fe4918;
+  box-shadow: 0px 0px 30px #666;
+  cursor: pointer;
+}
+
+.tabla-precio ul li{
+  font-family: var(--fontfamilyPtSans);
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #868686;
+  line-height: 26px;
+  list-style: none;
+
+}
+
+.tabla-precio ul li:before{
+  font-family: 'FontAwesome';
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 5px;
+  font-size: 20px;
+  color: green;
+  -webkit-font-smoothing:antialiased;
+  content: '\f00c';
+}
+
+.tabla-precio h3{
+  font-family: var(--fontfamilyOswald);
+  color: #fe4918;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.tabla-precio p{
+  font-size: 4em;
+  color: black;
+  font-family: var(--fontfamilyOswald);
+  margin-bottom: 10px;
+}
+
+.tabla-precio .button{
+  width: 90%;
+}
+
+
+
+
 
 /* ==========================================================================
    Helper classes
