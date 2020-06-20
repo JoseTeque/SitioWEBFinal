@@ -480,7 +480,16 @@ hr{
   background-color: #fff;
   color: #fe4918;
 }
+.button.transparente{
+  background-color: transparent;
+  border: 2px solid #fff;
 
+}
+
+.button.transparente:hover{
+  background-color: #fe4918;
+  border: 2px solid #fe4918;
+}
 @media (min-width: 480px) {
   .button{
     flex: 0 0 auto;
@@ -552,6 +561,7 @@ hr{
 .invitado:hover img{
   filter: grayscale(0);
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 .invitado:hover p{
@@ -616,9 +626,7 @@ hr{
   flex-wrap: wrap;
 }
 
-
-
- .numero{
+.numero{
   color: #fe4918;
   font-size: 4em;
   margin: 0;
@@ -651,7 +659,7 @@ ul{
 
 .tabla-precio{
   background-color: #fff;
-  border: 1px solid #d8d8d8;
+  border: 1px solid #868686;
   padding: 40px 0;
   text-align: center;
   transition: all .3s ease-in-out;
@@ -708,9 +716,224 @@ ul{
   width: 90%;
 }
 
+/*===============================
+  MAPA
+   =============================*/
+.mapa{
+  background-color: green;
+  height: 420px;
+}
 
+/*===============================
+  TESTIMONIALES
+   =============================*/
+.testimoniales{
+  padding-bottom: 20px;
+}
 
+@media (min-width: 768px) {
+  .testimoniales{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
+.testimonial{
+  padding: 5px;
+}
+
+.contenido-testimonial{
+  background-color: #fff;
+  padding-bottom: 20px;
+  border: 1px solid #868686;
+  position: relative;
+  margin: 0 0 10px 0;
+}
+
+.contenido-testimonial p{
+  text-align: justify;
+  font-size: 1em;
+  font-family: var(--fontfamilyPtSans);
+  padding: 0 20px 0 65px;
+}
+
+.contenido-testimonial p::before{
+  content: '\201c';
+  position: absolute;
+  left: 13px;
+  top: 0;
+  font-size: 8rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  color: #fe4918;
+}
+
+.footer-testimoniales{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-testimoniales img{
+  width: 20%;
+  border-radius: 50%;
+  margin:0 10px;
+}
+
+.footer-testimoniales cite{
+  color: #fe4918;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.footer-testimoniales cite span{
+  color: black;
+  display: block;
+  text-transform: none;
+}
+
+/*===============================
+  NEWSLETTERS
+   =============================*/
+.newsletter{
+  position: relative;
+  height: auto;
+}
+
+.newsletter::before{
+  background-image: url('../img/bg-newsletter.jpg');
+  content: '';
+}
+
+.newsletter .contenido{
+  padding: 100px 0;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+.newsletter .contenido p{
+  font-size: 1.2em;
+  text-transform: lowercase;
+  margin: 0;
+}
+
+.newsletter .contenido h3{
+  text-transform: uppercase;
+  font-size: 7vw;
+  font-family: var(--fontfamilyPtSans);
+  margin: 0;
+}
+
+/*===============================
+  TIEMPO DE INICIO
+   =============================*/
+.tiempo-inicio{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-around;
+}
+
+.cuenta-regresiva{
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .tiempo-inicio{
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-around;
+  }
+}
+
+.tiempo-inicio li{
+  list-style: none;
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  font-family: var(--fontfamilyOswald);
+  text-transform: uppercase;
+  flex: 0 0 50%;
+  flex-wrap: wrap;
+}
+
+.tiempo-inicio li{
+  color: black;
+}
+
+.tiempo-inicio li p{
+  font-size: 4em;
+}
+
+/*===============================
+  FOOTER
+   =============================*/
+.sitio-footer{
+  background-color: rgb(22, 21, 21);
+}
+
+.footer-texto{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+
+  .footer-texto{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer-conjunto{
+    flex: 1;
+    padding-right: 20px;
+  }
+
+  .footer-conjunto:last-of-type{
+    padding-right: 0;
+  }
+}
+
+.footer-texto{
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-conjunto h3{
+  font-size: 2em;
+  text-transform: uppercase;
+  font-family: var(--fontfamilyPtSans);
+}
+
+.footer-conjunto h3 span{
+  color: #fe4918;
+}
+
+.footer-conjunto p{
+  font-family: var(--fontfamilyPtSans);
+  text-align: justify;
+}
+
+.footer-conjunto .redes-sociales{
+  text-align: left;
+}
+
+.ultimos-tweets p span{
+  color: #fe4918;
+}
+
+/* COPYRIGHT */
+.copyright{
+  background-color: rgb(10, 10, 10);
+  padding: 6px 0;
+}
+
+.copyright p{
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+}
 
 /* ==========================================================================
    Helper classes
