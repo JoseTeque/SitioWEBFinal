@@ -469,6 +469,7 @@ hr{
   text-align: center;
   font-weight: bold;
   border: 2px solid #fe4918;
+  cursor: pointer;
 }
 
 .button:hover{
@@ -640,10 +641,39 @@ hr{
   grid-template-columns: repeat(1, 1fr);
 }
 
+@media (min-width: 480px) {
+  .lista-precios {
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 10px;
+  }
+
+  .lista-precios li:last-of-type{
+    grid-column: 1 / 3;
+  }
+
+
+}
+
 @media (min-width: 768px) {
   .lista-precios {
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(2,1fr);
     column-gap: 10px;
+  }
+
+  .lista-precios li:last-of-type{
+    grid-column: 1 / 3;
+  }
+
+}
+
+@media (min-width: 968px) {
+  .lista-precios {
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 10px;
+  }
+
+  .lista-precios li:last-of-type{
+    grid-column: 3 / 4;
   }
 }
 
@@ -659,7 +689,7 @@ ul{
 
 .tabla-precio{
   background-color: #fff;
-  border: 1px solid #868686;
+  border: 1px solid #e1e1e1;
   padding: 40px 0;
   text-align: center;
   transition: all .3s ease-in-out;
@@ -745,7 +775,7 @@ ul{
 .contenido-testimonial{
   background-color: #fff;
   padding-bottom: 20px;
-  border: 1px solid #868686;
+  border: 1px solid #e1e1e1;
   position: relative;
   margin: 0 0 10px 0;
 }
@@ -871,6 +901,7 @@ ul{
    =============================*/
 .sitio-footer{
   background-color: rgb(22, 21, 21);
+  margin-top: 30px;
 }
 
 .footer-texto{
@@ -934,6 +965,172 @@ ul{
   text-align: center;
   font-size: 16px;
 }
+
+/*===================================================================
+  PAGINAS INTERNAS
+  ===================================================================*/
+/*===============================
+   REGISTRO DE USUARIOS
+   =============================*/
+form.registro h3{
+  text-transform: uppercase;
+  text-align: center;
+  margin: 20px 0 0 0;
+  font-family: var(--fontfamilyOswald);
+  color: #fe4918;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.lista-precios .tabla-precio h3{
+  font-size: 16px;
+}
+
+form.registro label{
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+h4{
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 2px solid #fe4918;
+  padding-bottom: 10px;
+  font-size: 1.2em;
+}
+
+div.caja{
+  background-color: white;
+  border: 1px solid #e1e1e1;
+  padding: 10px;
+  margin: 10px;
+}
+
+.campo{
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.campo label{
+  flex: 0 0 90px;
+}
+
+.campo input{
+  flex: 1;
+}
+
+.w-100{
+  flex: 0 0 100%;
+}
+
+@media (min-width: 1200px) {
+
+  form .datos-caja{
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .datos-caja{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .campo{
+    flex: 0 0 calc(33.3% - 10px);
+  }
+
+}
+
+.paquetes .tabla-precio:hover{
+  transform: none;
+  box-shadow: none;
+}
+
+.paquetes .tabla-precio input{
+  display: block;
+  clear: both;
+  width: 100px;
+  margin: 10px auto 0 auto;
+}
+
+.contenido-dia{
+  padding: 20px;
+  /* display: none; */
+}
+
+.contenedor-talleres label{
+  display: block;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .contenedor-talleres{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .contenido-talleres{
+    flex: 0 0 calc(33.3% - 10px);
+  }
+
+}
+
+.contenido-talleres input{
+  margin-right: 10px;
+
+}
+
+.contenido-talleres time{
+  color: #fe4918;
+}
+
+.contenido-talleres p{
+  text-align: left;
+}
+
+.contenido-talleres label{
+  font-weight: 400;
+  font-size: 14px;
+
+}
+
+/* RESUMEN REGISTROS */
+.resumen p{
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .contenedor-resumen{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .extras,.total{
+    flex: 0 0 calc(50% - 10px);
+  }
+
+}
+
+.extras .orden {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 20px;
+
+}
+
+.btn-centrar{
+  display: flex;
+  justify-content: center;
+}
+
+
+.contenedor-resumen .extras{
+  padding: 30px;
+}
+
 
 /* ==========================================================================
    Helper classes
