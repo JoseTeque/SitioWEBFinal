@@ -5,7 +5,6 @@
 
   document.addEventListener("DOMContentLoaded", function () {
 
-
    /*--===============================
       GOOGLE MAPS
       =============================*/
@@ -22,6 +21,8 @@
             .bindPopup('Villa Padre Alvear.')
             .openPopup();
       }
+
+
 
 
     /*--===============================
@@ -41,7 +42,7 @@
       // BOTONES Y DIVS
       calcular: document.getElementById("calcular"),
       errorDiv: document.getElementById("error"),
-      botonRegistro: document.getElementById("btnRegistro"),
+      btnRegistro: document.getElementById("btnRegistro"),
       listaProductos: document.getElementById("lista-productos"),
       suma: document.getElementById("suma-total"),
 
@@ -56,7 +57,10 @@
     var m = {
       inicio: function () {
         // EVENTOS DE REGISTRO
+
+
         if(document.getElementById('calcular')){
+        p.btnRegistro.style.display = 'none';
         p.calcular.addEventListener("click", m.calcularMontos);
         p.pase_dia.addEventListener("blur", m.mostrarDias);
         p.pase_dos_dias.addEventListener("blur", m.mostrarDias);
@@ -112,6 +116,10 @@
           }
 
           p.suma.innerHTML = "$ " + totalPagar.toFixed(2);
+
+          p.btnRegistro.style.display = 'block'
+
+          document.getElementById('total_pedido').value = totalPagar;
         }
       },
       mostrarDias: function (e) {
