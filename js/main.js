@@ -5,6 +5,25 @@
 
   document.addEventListener("DOMContentLoaded", function () {
 
+
+   /*--===============================
+      GOOGLE MAPS
+      =============================*/
+      const mapa = document.getElementById('map');
+
+      if(mapa){
+        var map = L.map('map').setView([-33.389967, -71.670417], 16);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([-33.389967, -71.670417]).addTo(map)
+            .bindPopup('Villa Padre Alvear.')
+            .openPopup();
+      }
+
+
     /*--===============================
       PARAMETROS DE OBJETOS
        =============================*/
@@ -28,7 +47,7 @@
 
       // EXTRAS
       etiquetas: document.getElementById("etiquetas"),
-      camisas: document.getElementById("camisa-evento"),
+      camisas: document.getElementById("camisa-evento")
     };
 
     /*--===============================
@@ -45,6 +64,7 @@
         p.nombre.addEventListener('blur', m.validarCampo);
         p.apellido.addEventListener('blur', m.validarCampo);
         p.email.addEventListener('blur', m.validarMail);
+
         }
 
       },
@@ -207,22 +227,14 @@
 
 $(function(){
 
-   /*--===============================
-      GOOGLE MAPS
-      =============================*/
-
-  var map = L.map('map').setView([-33.389967, -71.670417], 16);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-
-  L.marker([-33.389967, -71.670417]).addTo(map)
-      .bindPopup('Villa Padre Alvear.')
-      .openPopup();
 
   //LETTERING
   $('.nombre-sitio').lettering();
+
+  // AGREGAR CLASE A MENU
+  $('body.conferecia .navegacion-principal a:contains("Conferencia")').addClass('activo');
+  $('body.calendario .navegacion-principal a:contains("Calendario")').addClass('activo');
+  $('body.invitados .navegacion-principal a:contains("Invitados")').addClass('activo');
 
   // PROGRAMA DE CONFERENCIA
   $('.ocultar').hide();
@@ -282,12 +294,13 @@ $(function(){
   });
 
   // MENU NAVEGACION RESPONSIVO
-
-  $('.menu-movil').on('click',menuResponsivo);
-
-  function menuResponsivo(){
+  $('.barra-principal .menu-movil').click(function(){
     $('.navegacion-principal a').slideToggle();
-  }
+  })
+
+    // COLORBOX
+    $('.invitado-info').colorbox({inline:true, width:"50%"});
+
 });
 
 
