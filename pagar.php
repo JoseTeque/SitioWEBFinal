@@ -1,0 +1,144 @@
+<?php
+
+    if(!isset($_POST['submit'])){
+        exit('Hubo un error');
+    }
+
+        use PayPal\Api\Payer;
+        use PayPal\Api\Item;
+        use PayPal\Api\ItemList;
+        use PayPal\Api\Details;
+        use PayPal\Api\Amount;
+        use PayPal\Api\Transaction;
+        use PayPal\Api\RedirectUrls;
+        use PayPal\Api\Payment;
+
+    require 'includes/paypal.php';
+
+    if(isset($_POST['submit'])):
+        $nombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $email = $_POST['email'];
+        $regalo = $_POST['regalo'];
+        $total_pedido = $_POST['total_pedido'];
+        $fecha = date('Y-m-d H:i:s');
+        //pedidos
+        $camisa = $_POST['pedidos_extras']['camisas']['cantidad'];
+        $precio_camisa = $_POST['pedidos_extras']['camisas']['precio'];
+        $etiquetas = $_POST['pedidos_extras']['etiquetas']['cantidad'];
+        $precio_etiquetas = $_POST['pedidos_extras']['etiquetas']['precio'];
+        $boletos = $_POST['boletos'];
+        $numeroBoletos = $boletos;
+        $pedidosExtras = $_POST['pedidos_extras'];
+
+        include_once './includes/funciones/funciones.php';
+        $pedido =  productos_json($boletos,$etiquetas,$camisa);
+        //EVENTOS
+        $eventos = $_POST['registro'];
+        $registro = eventos_json($eventos);
+
+        try {
+        require_once('includes/funciones/db_conexion.php');
+        $stmt = $conn->prepare("INSERT INTO registrados(nombre_registrado, apellido_registrado, email_registrado, fecha_registro, pases_articulos, talleres_regitrados, regalo, total_pagado,pagado) VALUES (?,?,?,?,?,?,?,?,?)");
+        $pagado = 0;
+        $stmt->bind_param("ssssssisi",$nombre, $apellido,$email,$fecha,$pedido,$registro,$regalo,$total_pedido,$pagado);
+        $stmt->execute();
+        $Id_registro = $stmt->insert_id;
+        $stmt->close();
+        $conn->close();
+        // header('Location:validar_registro.php?exitoso=1');
+      } catch (\Exception $e) {
+        echo $e->getMessage();
+      }
+    endif;
+
+    $compra = new Payer();
+    $compra->setPaymentMethod('paypal');
+
+
+    $articulo = new Item();
+    $articulo->setName($producto)
+             ->setCurrency('USD')
+             ->setQuantity(1)
+             ->setPrice($precio);
+
+    $i = 0;
+    $arreglo_pedido = array();
+    foreach($numeroBoletos as $key => $value){
+      if((int) $value['cantidad'] > 0){
+        ${"articulo$i"} = new Item();
+        $arreglo_pedido[] =  ${"articulo$i"};
+        ${"articulo$i"}->setName("Pase: ". $key)
+                       ->setCurrency('USD')
+                      ->setQuantity( (int) $value['cantidad'])
+                      ->setPrice( (int) $value['precio']);
+
+                      $i++;
+      }
+    }
+
+    foreach($pedidosExtras as $key => $value){
+
+      if((int) $value['cantidad'] > 0){
+
+        if($key == 'camisas'){
+          $precio = (float) $value['precio'] * .93;
+        }else{
+          $precio = (int) $value['precio'];
+        }
+        ${"articulo$i"} = new Item();
+        $arreglo_pedido[] = ${"articulo$i"};
+        ${"articulo$i"}->setName("Extras: ". $key)
+                       ->setCurrency('USD')
+                      ->setQuantity( (int) $value['cantidad'])
+                      ->setPrice( $precio);
+
+                      $i++;
+      }
+    }
+
+    $lista_articulos = new ItemList();
+    $lista_articulos->setItems($arreglo_pedido);
+
+
+
+    $cantidad= new Amount();
+    $cantidad->setCurrency('USD')
+            ->setTotal($total_pedido);
+
+
+    $transaccion = new Transaction();
+    $transaccion->setAmount($cantidad)
+                ->setItemList($lista_articulos)
+                ->setDescription('Pago GDLWebCamp')
+                ->setInvoiceNumber( $Id_registro);
+
+    echo $transaccion->getInvoiceNumber();
+
+
+    $redireccionar = new RedirectUrls();
+    $redireccionar->setReturnUrl(URL_SITIO . "pago_finalizado.php?id_pago={$Id_registro}")
+                  ->setCancelUrl(URL_SITIO . "pago_finalizado.php?id_pago={$Id_registro}");
+
+    $pago = new Payment();
+    $pago->setIntent("sale")
+         ->setPayer($compra)
+         ->setRedirectUrls($redireccionar)
+         ->setTransactions(array($transaccion));
+
+    try{
+
+        $pago->create($apiContext);
+
+    }catch(PayPal\Exception\PayPalConnectionException $pce){
+        echo "<pre>";
+        print_r(json_decode($pce->getData()));
+        exit;
+        echo "</pre>";
+    }
+
+    $aprobado = $pago->getApprovalLink();
+
+    header("Location: {$aprobado}");
+?>
+

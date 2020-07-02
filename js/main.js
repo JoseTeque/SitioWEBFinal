@@ -278,7 +278,7 @@ $(function(){
   }
 
   // CUENTA REGRESIVA
-  $('.cuenta-regresiva').countdown('2020/06/30 09:00:00', function(event){
+  $('.cuenta-regresiva').countdown('2020/07/20 09:00:00', function(event){
     $('#dias').html(event.strftime('%D'));
     $('#horas').html(event.strftime('%H'));
     $('#minutos').html(event.strftime('%M'));
@@ -308,6 +308,10 @@ $(function(){
 
     // COLORBOX
     $('.invitado-info').colorbox({inline:true, width:"50%"});
+
+    $('.boton_newsletter').colorbox({inline:true, width:"50%"});
+
+
 
 });
 
